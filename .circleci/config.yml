@@ -1,5 +1,6 @@
 version: 2.1
 orbs:
+  # Load components for Node and AWS CLI
   node: circleci/node@4.7
   aws-cli: circleci/aws-cli@2.0.0
 jobs:
@@ -12,22 +13,28 @@ jobs:
       - node/install-packages:
           app-dir: ~/app/udagram-api
       - run:
+          # Generate Archive.zip file from distributed code version.
           name: Generate Archive File
           command: |-
             npm run build
+      # Install AWS Cli v2.0
       - aws-cli/install
+      # Prepare AWS Credentials for CLI Usage
       - aws-cli/setup:
           aws-access-key-id: AWS_ACCESS_KEY
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           aws-region: AWS_REGION
+      # Copy Archive.zip into AWS Elastic Beanstalk Bucket
       - run:
           name: Copy Source to S3 Bucket
           command: |-
             aws s3 cp ./www/Archive.zip $AWS_EB_BUCKET_PATH
+      # Create Application Version based on Archive.zip
       - run:
           name: Create Application
           command: |-
             aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label <<pipeline.git.revision>> --source-bundle S3Bucket="$AWS_EB_BUCKET",S3Key="Archive.zip"
+      # Deploy new version of application into AWS ELB. After this step the new version will be available for usage.
       - run:
           name: Build and Deploy API Service
           command: |-
@@ -41,14 +48,18 @@ jobs:
       - node/install-packages:
           app-dir: ~/app/udagram-frontend
       - run:
+          # Create distributed version of source code.
           name: Create Distrubuted/Build Source Version
           command: npm run build
       - aws-cli/install
       - run:
+          # Deploy/Copy distributed content generate and replace content in AWS S3 Bucket. After this step new version will be available for usage.
           name: Deploy Build WebSite
           command: aws s3 cp --recursive ./www $AWS_S3_BUCKET_PATH
 workflows:
   deploy_app:
     jobs:
+      # API Service Deployment Job
       - api_service
+      # Web FrontEnd Deployment Job
       - front_end
