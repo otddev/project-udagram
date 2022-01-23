@@ -16,7 +16,6 @@ jobs:
           command: |-
             npm run build
             printenv > www/.env
-            npm run archive
       - aws-cli/install
       - run:
           name: Build and Deploy API Service
