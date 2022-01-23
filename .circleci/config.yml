@@ -1,0 +1,30 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.7
+  aws-cli: circleci/aws-cli@2.0.0
+jobs:
+  api_service:
+    working_directory: ~/app/udagram-api
+    executor: node/default
+    steps:
+      - checkout:
+          path: ~/app
+      - node/install-packages:
+          app-dir: ~/app/udagram-api
+      - run:
+          name: Generate Archive File
+          command: |-
+            npm run build
+            printenv > www/.env
+            npm run archive
+      - aws-cli/install
+      - run:
+          name: Build and Deploy API Service
+          command: |-
+            aws s3 cp ./www/Archive.zip $S3_BUCKET_SERVER
+            aws elasticbeanstalk create-application-version --application-name $EB_APP --version-label <<pipeline.git.revision>> --source-bundle S3Bucket="$EB_BUCKET",S3Key="Archive.zip"
+            aws elasticbeanstalk update-environment --application-name $EB_APP --environment-name $EB_ENV --version-label <<pipeline.git.revision>>
+workflows:
+  deploy_app:
+    jobs:
+      - api_service
