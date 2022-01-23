@@ -1,7 +1,9 @@
 # Project Infrastructure
 #### Below are the requirements/dependencies for successful project deployment.
 
-![Architecture](arch.png)
+
+### Diagram
+![Infrastructure](udagram_infra.jpeg)
 
 ### Amazon Web Services (AWS)
 

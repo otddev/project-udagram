@@ -1,7 +1,8 @@
 # Project Automated Pipeline Structure
 #### Below are the requirements/dependencies for successful project deployment.
 
-![Architecture](arch.png)
+### Diagram
+![Pipeline](udagram_pipeline.jpeg)
 
 ### Circle CI (Cont. Intergration)
 

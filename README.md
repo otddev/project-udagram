@@ -14,6 +14,8 @@ This is a alternate project to provide technics for automated application deploy
 
 The original code source for this project is located at: **https://github.com/udacity/nd0067-c4-deployment-process-project-starter**
 
+For more information check the documentation at: **https://github.com/otddev/project-udagram/tree/main/documentation**
+
 ### Sample Deployment
 
 Deployment Status: [![CircleCI](https://circleci.com/gh/otddev/project-udagram/tree/main.svg?style=svg)](https://circleci.com/gh/otddev/project-udagram/tree/main)
@@ -59,7 +61,7 @@ all the resources you need for this project with no surprises.
 - A provisioned s3 bucket for image uploads from posts created in udagram (Note: If desired you can utilize same bucket created for front-end.)
 
 ### Enviroment Settings
-Note: When deploying in AWS for project grading you cannot use a **.env** file to get these parameters.
+Note: Create a .env file only for testing locally. For deployment you need to provide this variables via other services.
 
 ```
 # Database Configuration
@@ -96,12 +98,6 @@ JWT_SECRET=thebigsecret
 - **install**: Execute **npm run install** for both udagram-api and udagram-frontend.
 - **start-api**: Starts the udagram-api project for local testing.
 - **start-web**: Starts the udagram-api project for local testing.
-
-1. In AWS, provision a publicly available RDS database running Postgres. <Place holder for link to classroom article>
-1. In AWS, provision a s3 bucket for hosting the uploaded files. <Place holder for tlink to classroom article>
-1. Export the ENV variables needed or use a package like [dotnev](https://www.npmjs.com/package/dotenv)/.
-1. From the root of the repo, navigate udagram-api folder `cd starter/udagram-api` to install the node_modules `npm install`. After installation is done start the api in dev mode with `npm run dev`.
-1. Without closing the terminal in step 1, navigate to the udagram-frontend `cd starter/udagram-frontend` to intall the node_modules `npm install`. After installation is done start the api in dev mode with `npm run start`.
 
 ### Testing Locally
 
