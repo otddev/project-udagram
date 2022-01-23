@@ -1,5 +1,16 @@
-
 {
-    "scripts": {},
-    "devDependencies": {}
+    "name": "project-udagram",
+    "version": "1.0.0",
+    "description": "Test Application Deployment",
+    "author": "Antonio G. Garcia",
+    "scripts": {
+        "build": "cd udagram-api && npm run build && cd .. && cd udagram-frontend && npm run build && cd ..",
+        "install": "cd udagram-api && npm install && cd .. && cd udagram-frontend && npm install && cd ..",
+        "start-api": "cd udagram-api && npm run dev",
+        "start-web": "cd udagram-frontend && npm run start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/otddev/project-udagram.git"
+    }
 }
