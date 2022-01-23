@@ -46,7 +46,7 @@ jobs:
       - aws-cli/install
       - run:
           name: Deploy Build WebSite
-          command: aws s3 cp --recursive --acl public-read ./www $AWS_S3_BUCKET_PATH
+          command: aws s3 cp --recursive ./www $AWS_S3_BUCKET_PATH
 workflows:
   deploy_app:
     jobs:
