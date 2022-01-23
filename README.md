@@ -90,7 +90,8 @@ JWT_SECRET=thebigsecret
         "build": "cd udagram-api && npm run build && cd .. && cd udagram-frontend && npm run build && cd ..",
         "install": "cd udagram-api && npm install && cd .. && cd udagram-frontend && npm install && cd ..",
         "start-api": "cd udagram-api && npm run dev",
-        "start-web": "cd udagram-frontend && npm run start"
+        "start-web": "cd udagram-frontend && npm run start",
+        "test-web": "cd udagram-frontend && npm run test"
     }
 ````
 
@@ -98,6 +99,7 @@ JWT_SECRET=thebigsecret
 - **install**: Execute **npm run install** for both udagram-api and udagram-frontend.
 - **start-api**: Starts the udagram-api project for local testing.
 - **start-web**: Starts the udagram-api project for local testing.
+- **test-web**: Runs the unit tests for udagram-frontend project.
 
 ### Testing Locally
 
