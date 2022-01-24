@@ -3,6 +3,7 @@ orbs:
   # Load components for Node and AWS CLI
   node: circleci/node@4.7
   aws-cli: circleci/aws-cli@2.0.0
+  awsebcli: sbc-orbs/awsebcli@0.0.3
 jobs:
   api_service:
     working_directory: ~/app/udagram-api
@@ -17,6 +18,14 @@ jobs:
           name: Generate Archive File
           command: |-
             npm run build
+      - run:
+          # Install AWS EB CLI and Set EB Env Variables
+          name: Install EB Dependencies
+          command: |-
+            sudo apt update
+            sudo apt install python3-pip python-dev
+            sudo pip install awsebcli
+            sudo ./deploy.sh
       # Install AWS Cli v2.0
       - aws-cli/install
       # Prepare AWS Credentials for CLI Usage
@@ -60,6 +69,12 @@ workflows:
   deploy_app:
     jobs:
       # API Service Deployment Job
-      - api_service
+      - api_service:
+          filters:
+            branches:
+              only: main
       # Web FrontEnd Deployment Job
-      - front_end
+      - front_end:
+          filters:
+            branches:
+              only: main
