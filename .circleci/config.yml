@@ -32,7 +32,9 @@ jobs:
             sudo pip3 install --upgrade pip
             sudo pip3 install --upgrade distlib
             sudo pip3 install awsebcli --upgrade
-            sudo ./deploy.sh
+            ls
+            chmod u+x deploy.sh
+            ./deploy.sh
       # Install AWS Cli v2.0
       - aws-cli/install
       # Prepare AWS Credentials for CLI Usage
