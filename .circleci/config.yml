@@ -21,9 +21,9 @@ jobs:
           # Install AWS EB CLI and Set EB Env Variables
           name: Install EB Dependencies
           command: |-
-            sudo apt-get update
-            sudo apt-get install -y python-pip python-dev
-            sudo pip install awsebcli
+            sudo apt-get -y -qq update
+            sudo apt install python3-pip python3-dev
+            sudo pip3 install awsebcli --upgrade
             sudo ./deploy.sh
       # Install AWS Cli v2.0
       - aws-cli/install
